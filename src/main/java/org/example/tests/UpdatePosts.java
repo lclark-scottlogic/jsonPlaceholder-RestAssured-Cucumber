@@ -3,15 +3,14 @@ package org.example.tests;
 
 import org.example.pojo.Post;
 import org.example.utilities.Utils;
-import org.example.utilities.ResSpecBuilders;
 import org.testng.Assert;
 
 public class UpdatePosts {
 
-public void updatePostTitle() {
+public void updatePostTitle(String title) {
 //    Update Post Title
   Post titlePost = new Post();
-  titlePost.setTitle("New Title");
+  titlePost.setTitle(title);
   Post updatePostTitle = Utils.createPostReq(titlePost)
       .when().put("posts/1")
       .then().spec(Utils.resOk()).extract().response().as(Post.class);

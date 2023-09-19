@@ -1,5 +1,7 @@
 package org.example.pojo;
 
+import java.util.Objects;
+
 public class Post {
   private int id;
   private String title;
@@ -36,5 +38,22 @@ public class Post {
 
   public void setUserId(int userId) {
     this.userId = userId;
+  }
+  public String getJsonString(String json){
+    if(Objects.equals(json, "body")){
+      return this.getBody();
+    } else if (Objects.equals(json, "title")) {
+      return this.getTitle();
+    }
+  return json;
+  }
+
+  public int getJsonInt(String json) {
+    if(Objects.equals(json, "id")){
+      return this.getId();
+    } else if (Objects.equals(json, "userId")) {
+      return this.getUserId();
+    }
+    return 0;
   }
 }

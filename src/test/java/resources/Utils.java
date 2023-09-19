@@ -1,4 +1,4 @@
-package org.example.utilities;
+package resources;
 
 import static io.restassured.RestAssured.given;
 
@@ -9,17 +9,14 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Properties;
 import org.example.pojo.Post;
 
 public class Utils {
 
-  public static RequestSpecification baseReq()  {
+  public static RequestSpecification baseReq() {
 //    try/catch for case that no such logging file exists
     PrintStream log = null;
     try {
@@ -27,26 +24,27 @@ public class Utils {
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
+
     return new RequestSpecBuilder().setBaseUri("https://jsonplaceholder.typicode.com")
         .setContentType(ContentType.JSON).addFilter(RequestLoggingFilter.logRequestTo(log)).addFilter(
             ResponseLoggingFilter.logResponseTo(log)).build();
   }
-  public static RequestSpecification createPostReq(Post post) {
+  public static RequestSpecification createPostReq(Post post){
     return given().spec(baseReq()).body(post);
   }
-  public static RequestSpecification getPostReq(int id) {
+  public static RequestSpecification getPostReq(int id){
     return given().spec(baseReq()).pathParam("id",id);
   }
   public static RequestSpecification getAllPostReq(){
     return given().spec(baseReq());
   }
-  public static RequestSpecification deletePostReq(int id) {
+  public static RequestSpecification deletePostReq(int id){
     return given().spec(baseReq()).pathParam("id",id);
   }
-  public static RequestSpecification getPostByUserReq(int id) {
+  public static RequestSpecification getPostByUserReq(int id){
     return given().spec(baseReq()).queryParam("userId",id);
   }
-  public static RequestSpecification patchPostReq(String Json,int id)  {
+  public static RequestSpecification patchPostReq(String Json,int id){
     return given().spec(baseReq()).body(Json).pathParam("id",id);
   }
 

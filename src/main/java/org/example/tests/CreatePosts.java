@@ -2,7 +2,6 @@ package org.example.tests;
 
 import org.example.pojo.Post;
 import org.example.utilities.Utils;
-import org.example.utilities.ResSpecBuilders;
 import org.testng.Assert;
 
 

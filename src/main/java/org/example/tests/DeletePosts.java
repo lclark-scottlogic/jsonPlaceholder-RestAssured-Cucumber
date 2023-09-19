@@ -1,7 +1,6 @@
 package org.example.tests;
 
 import org.example.utilities.Utils;
-import org.example.utilities.ResSpecBuilders;
 
 public class DeletePosts {
 

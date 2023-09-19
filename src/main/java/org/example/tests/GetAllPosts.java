@@ -3,7 +3,6 @@ package org.example.tests;
 import io.restassured.path.json.JsonPath;
 import org.example.utilities.GetDetails;
 import org.example.utilities.Utils;
-import org.example.utilities.ResSpecBuilders;
 import org.testng.Assert;
 
 public class GetAllPosts {
