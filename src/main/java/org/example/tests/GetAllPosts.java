@@ -1,22 +1,19 @@
 package org.example.tests;
 
 import io.restassured.path.json.JsonPath;
-import org.example.pojo.Post;
-import org.example.pojo.PostList;
 import org.example.utilities.GetDetails;
-import org.example.utilities.ReqSpecBuilders;
+import org.example.utilities.Utils;
 import org.example.utilities.ResSpecBuilders;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class GetAllPosts {
 
-  @Test
+
   public void getAllPosts() {
 //    Get all Posts
-    String getAllPosts = ReqSpecBuilders.getAllPostReq()
+    String getAllPosts = Utils.getAllPostReq()
         .when().get("/posts")
-        .then().spec(ResSpecBuilders.resOk()).extract().response().asString();
+        .then().spec(Utils.resOk()).extract().response().asString();
 //    Check the array is correct via assertions
     JsonPath js=new JsonPath(getAllPosts);
     Assert.assertEquals(js.get("[0].title"),"sunt aut facere repellat provident occaecati excepturi optio reprehenderit");

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="RestAssured-JsonPlaceholder" />
+        <module name="jsonPlaceholder-RestAssured-Cucumber" />
       </profile>
     </annotationProcessing>
   </component>

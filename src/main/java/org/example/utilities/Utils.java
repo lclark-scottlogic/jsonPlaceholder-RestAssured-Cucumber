@@ -3,11 +3,13 @@ package org.example.utilities;
 import static io.restassured.RestAssured.given;
 
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import org.example.pojo.Post;
 
-public class ReqSpecBuilders {
+public class Utils {
 
   public static RequestSpecification baseReq() {
     return new RequestSpecBuilder().setBaseUri("https://jsonplaceholder.typicode.com")
@@ -30,6 +32,21 @@ public class ReqSpecBuilders {
   }
   public static RequestSpecification patchPostReq(String Json,int id){
     return given().spec(baseReq()).body(Json).pathParam("id",id);
+  }
+  public static ResponseSpecification resOk(){
+    return new ResponseSpecBuilder()
+        .expectStatusCode(200)
+        .expectContentType(ContentType.JSON).build();
+  }
+  public static ResponseSpecification resCreated(){
+    return new ResponseSpecBuilder()
+        .expectStatusCode(201)
+        .expectContentType(ContentType.JSON).build();
+  }
+  public static ResponseSpecification resNotFound(){
+    return new ResponseSpecBuilder()
+        .expectStatusCode(404)
+        .expectContentType(ContentType.JSON).build();
   }
 
 }
