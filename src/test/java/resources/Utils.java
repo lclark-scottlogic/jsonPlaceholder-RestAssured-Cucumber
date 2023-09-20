@@ -15,50 +15,55 @@ import java.io.PrintStream;
 import org.example.pojo.Post;
 
 public class Utils {
-
-  public static RequestSpecification baseReq() {
+  public static RequestSpecification req;
+  public RequestSpecification baseReq() {
 //    try/catch for case that no such logging file exists
-    PrintStream log = null;
-    try {
-      log = new PrintStream(new FileOutputStream("logging.txt"));
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
 
-    return new RequestSpecBuilder().setBaseUri("https://jsonplaceholder.typicode.com")
-        .setContentType(ContentType.JSON).addFilter(RequestLoggingFilter.logRequestTo(log)).addFilter(
-            ResponseLoggingFilter.logResponseTo(log)).build();
+    if (req == null) {
+      PrintStream log = null;
+      try {
+        log = new PrintStream(new FileOutputStream("logging.txt"));
+      } catch (FileNotFoundException e) {
+        throw new RuntimeException(e);
+      }
+
+      req = new RequestSpecBuilder().setBaseUri("https://jsonplaceholder.typicode.com")
+          .setContentType(ContentType.JSON).addFilter(RequestLoggingFilter.logRequestTo(log))
+          .addFilter(
+              ResponseLoggingFilter.logResponseTo(log)).build();
+      return req;
+    }return req;
   }
-  public static RequestSpecification createPostReq(Post post){
+  public RequestSpecification createPostReq(Post post){
     return given().spec(baseReq()).body(post);
   }
-  public static RequestSpecification getPostReq(int id){
+  public RequestSpecification getPostReq(int id){
     return given().spec(baseReq()).pathParam("id",id);
   }
-  public static RequestSpecification getAllPostReq(){
+  public RequestSpecification getAllPostReq(){
     return given().spec(baseReq());
   }
-  public static RequestSpecification deletePostReq(int id){
+  public RequestSpecification deletePostReq(int id){
     return given().spec(baseReq()).pathParam("id",id);
   }
-  public static RequestSpecification getPostByUserReq(int id){
+  public RequestSpecification getPostByUserReq(int id){
     return given().spec(baseReq()).queryParam("userId",id);
   }
-  public static RequestSpecification patchPostReq(String Json,int id){
+  public RequestSpecification patchPostReq(String Json,int id){
     return given().spec(baseReq()).body(Json).pathParam("id",id);
   }
 
-  public static ResponseSpecification resOk(){
+  public ResponseSpecification resOk(){
     return new ResponseSpecBuilder()
         .expectStatusCode(200)
         .expectContentType(ContentType.JSON).build();
   }
-  public static ResponseSpecification resCreated(){
+  public ResponseSpecification resCreated(){
     return new ResponseSpecBuilder()
         .expectStatusCode(201)
         .expectContentType(ContentType.JSON).build();
   }
-  public static ResponseSpecification resNotFound(){
+  public ResponseSpecification resNotFound(){
     return new ResponseSpecBuilder()
         .expectStatusCode(404)
         .expectContentType(ContentType.JSON).build();
