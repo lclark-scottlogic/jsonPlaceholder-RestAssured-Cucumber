@@ -2,13 +2,20 @@ package stepDefinitions;
 
 import static org.junit.Assert.assertEquals;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import java.util.HashMap;
+import java.util.Map;
 import org.example.pojo.Post;
 import resources.Api;
+import resources.GetDetails;
 import resources.TestDataBuild;
 import resources.Utils;
 
@@ -30,7 +37,40 @@ public class stepDefinition extends Utils {
     res=createPostReq(data.createPostPayload(id,userId,title,body));
 
   }
-
+  @Given("We set {string} as {string}")
+  public void we_set_as(String parameter,String value){
+//    Here we need to inject the json as we cannot create a post with only one field
+//    We use a hashmap which we convert to json to send to the body of the request
+    Map<String,String> payload=new HashMap<>();
+    payload.put(parameter ,value);
+//    Convert Payload to JSON
+    ObjectMapper objectMapper=new ObjectMapper();
+    String jsonPayload;
+    try {
+      jsonPayload=objectMapper.writeValueAsString(payload);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      return;
+    }
+    res=patchPostReq(jsonPayload);
+  }
+  @Given("We set {string} as {int}")
+  public void we_set_as(String parameter,Integer value){
+//    Here we need to inject the json as we cannot create a post with only one field
+//    We use a hashmap which we convert to json to send to the body of the request
+    Map<String, Integer> payload=new HashMap<>();
+    payload.put(parameter ,value);
+//    Convert Payload to JSON
+    ObjectMapper objectMapper=new ObjectMapper();
+    String jsonPayload;
+    try {
+      jsonPayload=objectMapper.writeValueAsString(payload);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      return;
+    }
+    res=patchPostReq(jsonPayload);
+  }
   @When("User calls {string} endpoint with {string} method")
   public void user_calls_endpoint_with_method(String resource, String method) {
 //    Constructor is called with value of resource which has been assigned as global resource variable
@@ -73,14 +113,20 @@ public class stepDefinition extends Utils {
   }
   @Then("{string} in response body is {string}")
   public void in_response_body_is_string(String key, String value) {
+      assertEquals(value, post.getJsonString(key));
+    }
+  @Then("{string} in response body is:")
+  public void in_response_body_is_multiline(String key, String value) {
     assertEquals(value, post.getJsonString(key));
   }
+
   @Then("{string} in response body is {int}")
   public void in_response_body_is_int(String key, int value) {
     assertEquals(value,post.getJsonInt(key));
   }
-
-
-
-
+//Method which verifies userId using the getuseridfrompostid method
+  @Then("Post belongs to correct user")
+  public void post_belongs_to_correct_user() {
+    assertEquals(GetDetails.getUserIdFromPostId(post.getId()),post.getUserId());
+  }
 }

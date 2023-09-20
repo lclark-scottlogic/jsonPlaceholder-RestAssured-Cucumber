@@ -46,8 +46,8 @@ public class Utils {
   public static RequestSpecification getPostByUserReq(int id) {
     return given().spec(baseReq()).queryParam("userId",id);
   }
-  public static RequestSpecification patchPostReq(String Json,int id)  {
-    return given().spec(baseReq()).body(Json).pathParam("id",id);
+  public static RequestSpecification patchPostReq(String Json)  {
+    return given().spec(baseReq()).body(Json);
   }
 
   public static ResponseSpecification resOk(){

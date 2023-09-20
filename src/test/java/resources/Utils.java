@@ -22,11 +22,12 @@ public class Utils {
     if (req == null) {
       PrintStream log = null;
       try {
+//        Adds logs to external file
         log = new PrintStream(new FileOutputStream("logging.txt"));
       } catch (FileNotFoundException e) {
         throw new RuntimeException(e);
       }
-
+//Added logging filters so we can see req/res bodies in an external log file
       req = new RequestSpecBuilder().setBaseUri("https://jsonplaceholder.typicode.com")
           .setContentType(ContentType.JSON).addFilter(RequestLoggingFilter.logRequestTo(log))
           .addFilter(
@@ -49,8 +50,8 @@ public class Utils {
   public RequestSpecification getPostByUserReq(int id){
     return given().spec(baseReq()).queryParam("userId",id);
   }
-  public RequestSpecification patchPostReq(String Json,int id){
-    return given().spec(baseReq()).body(Json).pathParam("id",id);
+  public RequestSpecification patchPostReq(String Json){
+    return given().spec(baseReq()).body(Json);
   }
 
   public ResponseSpecification resOk(){
