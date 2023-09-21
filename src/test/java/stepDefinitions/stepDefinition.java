@@ -15,6 +15,7 @@ import io.restassured.path.json.JsonPath;
 import java.util.HashMap;
 import java.util.Map;
 import org.example.pojo.Post;
+import org.testng.Assert;
 import resources.Api;
 import resources.GetDetails;
 import resources.TestDataBuild;
@@ -77,6 +78,11 @@ public class stepDefinition extends Utils {
     postId=id;
     res=getPostReq(postId);
   }
+  @Given("All posts request")
+  public void allPostsRequest(){
+    res=getAllPostReq();
+  }
+
   @When("User calls {string} endpoint with {string} method")
   public void user_calls_endpoint_with_method(String resource, String method) {
 //    Constructor is called with value of resource which has been assigned as global resource variable
@@ -141,5 +147,24 @@ public class stepDefinition extends Utils {
     assertEquals(GetDetails.getUserIdFromPostId(post.getId()),post.getUserId());
   }
 
-
+//Method for getting an element of an array'sw attribute and asserting its value in
+//  the case the value is a string
+  @And("Resource at index {int} has {string} with value {string}")
+  public void resourceAtIndexHasWithValue(int index, String key, String value) {
+    String getAllPosts = response
+        .then().spec(resOk()).extract().response().asString();
+    JsonPath js=new JsonPath(getAllPosts);
+    String jsonPathExpression = String.format("[%d].%s", index, key);
+    Assert.assertEquals(js.get(jsonPathExpression),value);
+  }
+  //Method for getting an element of an array'sw attribute and asserting its value in
+//  the case the value is a string
+  @And("Resource at index {int} has {string} with value {int}")
+  public void resourceAtIndexHasWithValue(int index, String key, int value) {
+    String getAllPosts = response
+        .then().spec(resOk()).extract().response().asString();
+    JsonPath js=new JsonPath(getAllPosts);
+    String jsonPathExpression = String.format("[%d].%s", index, key);
+    Assert.assertEquals((Integer) js.get(jsonPathExpression),value);
+  }
 }
