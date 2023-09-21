@@ -11,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.path.json.JsonPath;
 import java.util.HashMap;
 import java.util.Map;
 import org.example.pojo.Post;
@@ -101,11 +102,10 @@ public class stepDefinition extends Utils {
 }
   @When("User calls GET endpoint for post")
   public void userCallsGetEndpointForPost() {
-    System.out.println(postId);
     response = res.when().get("/posts/{id}");
   }
   @Then("Status code is {int}")
-  public void status_code_is_int(int code){
+  public void status_code_is_int(int code) throws Exception {
     switch(code) {
       case 200:
         post = response.then().spec(resOk()).extract().response().as(Post.class);
@@ -116,6 +116,9 @@ public class stepDefinition extends Utils {
       case 404:
         String error=response.then().spec(resNotFound()).extract().response().asString();
         break;
+      default:
+        throw new Exception("Expected status code: "+code+"\nReceived status code: "+response.getStatusCode());
+
 
     }
   }
