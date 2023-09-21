@@ -26,7 +26,7 @@ public class stepDefinition extends Utils {
   Response response;
   TestDataBuild data = new TestDataBuild();
   Post post = new Post();
-
+  int postId;
   @Given("New post with {string} {string}")
   public void new_post_with(String parameter,String value) {
     res = createPostReq(data.updatePostPayload(parameter,value));
@@ -71,6 +71,11 @@ public class stepDefinition extends Utils {
     }
     res=patchPostReq(jsonPayload);
   }
+  @Given("PostId is {int}")
+  public void postIdIsId(int id) {
+    postId=id;
+    res=getPostReq(postId);
+  }
   @When("User calls {string} endpoint with {string} method")
   public void user_calls_endpoint_with_method(String resource, String method) {
 //    Constructor is called with value of resource which has been assigned as global resource variable
@@ -93,9 +98,12 @@ public class stepDefinition extends Utils {
         response = res.when().post(resourceApi.getResource());
         break;
     }
-
 }
-
+  @When("User calls GET endpoint for post")
+  public void userCallsGetEndpointForPost() {
+    System.out.println(postId);
+    response = res.when().get("/posts/{id}");
+  }
   @Then("Status code is {int}")
   public void status_code_is_int(int code){
     switch(code) {
@@ -129,4 +137,6 @@ public class stepDefinition extends Utils {
   public void post_belongs_to_correct_user() {
     assertEquals(GetDetails.getUserIdFromPostId(post.getId()),post.getUserId());
   }
+
+
 }

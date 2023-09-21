@@ -36,7 +36,7 @@ Feature: Patch Posts
     When User calls "post3" endpoint with "PATCH" method
     Then Status code is 200
     And "id" in response body is 3
-    And "userId" in response body is 2000
+    And "userId" in response body is <userId>
     And "title" in response body is "ea molestias quasi exercitationem repellat qui ipsa sit aut"
     And "body" in response body is:
     """
