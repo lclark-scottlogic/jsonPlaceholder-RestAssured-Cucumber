@@ -1,4 +1,5 @@
 Feature: Create Posts
+  @CreatePost
   Scenario Outline: Verify we can create a post
     Given Create post with <id> <userId> <title> <body>
     When User calls "allPosts" endpoint with "POST" method
@@ -7,8 +8,6 @@ Feature: Create Posts
     And "userId" in response body is <userId>
     And "title" in response body is <title>
     And "body" in response body is <body>
-
-
     Examples:
       | id | title         |body                      | userId  |
       | 2  |"My First Post"|"This is my newest post"  | 11      |

@@ -1,4 +1,5 @@
 Feature: Get Post By User
+  @GetPostByUser
   Scenario Outline:Verify we can get all the posts for a single user
     Given User has Id <userId>
     When User calls "allPosts" endpoint with "GET" method

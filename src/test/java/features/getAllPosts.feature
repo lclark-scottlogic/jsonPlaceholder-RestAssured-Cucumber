@@ -1,4 +1,5 @@
 Feature: Get All Posts
+  @GetAllPosts
   Scenario Outline: Verify we can retrieve the correct attribute values for posts
     Given All posts request
     When User calls "allPosts" endpoint with "GET" method

@@ -1,5 +1,5 @@
 Feature: Update Posts
-
+@UpdatePost
   Scenario Outline: Verify we can update a post's title
     Given New post with "title" <title>
     When User calls "post1" endpoint with "PUT" method
@@ -11,7 +11,7 @@ Feature: Update Posts
       | id | title     |body| userId |
       | 0  |"New Title"|null| 0      |
       | 0  |""         |null| 0      |
-
+  @UpdatePost
   Scenario Outline: Verify we can update a post's body
     Given New post with "body" <body>
     When User calls "post1" endpoint with "PUT" method

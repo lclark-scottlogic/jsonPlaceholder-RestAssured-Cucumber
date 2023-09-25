@@ -1,4 +1,5 @@
 Feature: Get Post By Id
+  @GetPostById
   Scenario Outline:Verify we can get specific posts
     Given PostId is <id>
     When User calls GET endpoint for post
@@ -11,6 +12,7 @@ Feature: Get Post By Id
       |id|title                                                                                                           |body                                                                                                                                                                |
       |1  | "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"                                  | "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"|
       |100|"at nam consequatur ea labore ea harum"                                                                        |         "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"    |
+@GetPostById
   Scenario Outline:Verify we cannot get post with invalid Id
     Given PostId is <id>
     When User calls GET endpoint for post

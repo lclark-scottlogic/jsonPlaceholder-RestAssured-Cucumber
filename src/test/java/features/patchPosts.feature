@@ -1,4 +1,5 @@
 Feature: Patch Posts
+  @PatchPost
   Scenario Outline:Verify we can update a specific post's title
     Given We set "title" as <title>
     When User calls "post1" endpoint with "PATCH" method
