@@ -28,7 +28,9 @@ public class stepDefinition extends Utils {
   Response response;
   TestDataBuild data = new TestDataBuild();
   Post post = new Post();
+  Post[] postList;
   int postId;
+
   @Given("New post with {string} {string}")
   public void new_post_with(String parameter,String value) {
     res = createPostReq(data.updatePostPayload(parameter,value));
@@ -81,6 +83,10 @@ public class stepDefinition extends Utils {
   @Given("All posts request")
   public void allPostsRequest(){
     res=getAllPostReq();
+  }
+  @Given("User has Id {int}")
+  public void user_has_id(int userId){
+    res=getPostByUserReq(userId);
   }
 
   @When("User calls {string} endpoint with {string} method")
@@ -159,12 +165,25 @@ public class stepDefinition extends Utils {
   }
   //Method for getting an element of an array'sw attribute and asserting its value in
 //  the case the value is a string
-  @And("Resource at index {int} has {string} with value {int}")
+  @Then("Resource at index {int} has {string} with value {int}")
   public void resourceAtIndexHasWithValue(int index, String key, int value) {
     String getAllPosts = response
         .then().spec(resOk()).extract().response().asString();
     JsonPath js=new JsonPath(getAllPosts);
     String jsonPathExpression = String.format("[%d].%s", index, key);
     Assert.assertEquals((Integer) js.get(jsonPathExpression),value);
+  }
+
+  @Then("Array has length {int}")
+  public void arrayHasLength(int length) {
+    postList= response.then().spec(resOk()).extract().response().as(Post[].class);
+    Assert.assertEquals(postList.length,length);
+  }
+//Method verifies all userIds in the list of posts are correct
+  @Then("All posts have userId {int}")
+  public void allPostsHaveUserId(int userId) {
+    for(Post post:postList) {
+      Assert.assertEquals(post.getUserId(), userId);
+    }
   }
 }
