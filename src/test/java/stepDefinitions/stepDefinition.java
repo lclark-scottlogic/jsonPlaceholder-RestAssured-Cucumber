@@ -18,7 +18,7 @@ import org.example.pojo.Comment;
 import org.example.pojo.Photo;
 import org.example.pojo.Post;
 import org.example.pojo.ToDo;
-import org.testng.Assert;
+import org.junit.Assert;
 import resources.Api;
 import resources.GetDetails;
 import resources.TestDataBuild;
@@ -188,7 +188,7 @@ public class stepDefinition extends Utils {
         .then().spec(resOk()).extract().response().asString();
     JsonPath js = new JsonPath(getAllPosts);
     String jsonPathExpression = String.format("[%d].%s", index, key);
-    Assert.assertEquals(js.get(jsonPathExpression), value);
+    assertEquals(js.get(jsonPathExpression), value);
   }
 
   //Method for getting an element of an array'sw attribute and asserting its value in
@@ -199,36 +199,36 @@ public class stepDefinition extends Utils {
         .then().spec(resOk()).extract().response().asString();
     JsonPath js = new JsonPath(getAllPosts);
     String jsonPathExpression = String.format("[%d].%s", index, key);
-    Assert.assertEquals((Integer) js.get(jsonPathExpression), value);
+    Assert.assertEquals((Object) js.get(jsonPathExpression), value);
   }
   @Then("Array has length {int}")
   public void arrayHasLength(int length) {
     postList = response.then().spec(resOk()).extract().response().as(Post[].class);
-    Assert.assertEquals(postList.length, length);
+    assertEquals(postList.length, length);
   }
 
   @Then("Comment array has length {int}")
   public void commentArrayHasLength(int length) {
     commentList = response.then().spec(resOk()).extract().response().as(Comment[].class);
-    Assert.assertEquals(commentList.length, length);
+    assertEquals(commentList.length, length);
   }
 
   @Then("Photo array has length {int}")
   public void photoArrayHasLength(int length) {
     photoList = response.then().spec(resOk()).extract().response().as(Photo[].class);
-    Assert.assertEquals(photoList.length, length);
+    assertEquals(photoList.length, length);
   }
 
   @Then("Album array has length {int}")
   public void albumArrayHasLength(int length) {
     albumList = response.then().spec(resOk()).extract().response().as(Album[].class);
-    Assert.assertEquals(albumList.length, length);
+    assertEquals(albumList.length, length);
   }
 
   @Then("Todo array has length {int}")
   public void todoArrayHasLength(int length) {
     toDoList = response.then().spec(resOk()).extract().response().as(ToDo[].class);
-    Assert.assertEquals(toDoList.length, length);
+    assertEquals(toDoList.length, length);
   }
 
 
@@ -236,7 +236,7 @@ public class stepDefinition extends Utils {
   @Then("All posts have userId {int}")
   public void allPostsHaveUserId(int userId) {
     for (Post post : postList) {
-      Assert.assertEquals(post.getUserId(), userId);
+      assertEquals(post.getUserId(), userId);
     }
   }
 }

@@ -2,10 +2,9 @@ package cucumber.Options;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import org.codehaus.groovy.runtime.callsite.ConstructorSite.ConstructorSiteNoUnwrapNoCoerce;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/java/features",glue={"stepDefinitions"},tags= "@CreatePost")
+@CucumberOptions(features="src/test/java/features",plugin="json:target/jsonReports/cucumber-report.json",glue={"stepDefinitions"})
 public class TestRunner {
 }
