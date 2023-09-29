@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,7 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.path.json.JsonPath;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.example.pojo.Album;
@@ -21,6 +23,7 @@ import org.example.pojo.ToDo;
 import org.junit.Assert;
 import resources.Api;
 import resources.GetDetails;
+import resources.HashMapper;
 import resources.TestDataBuild;
 import resources.Utils;
 
@@ -42,13 +45,16 @@ public class stepDefinition extends Utils {
 
 
   @Given("New post with {string} {string}")
-  public void new_post_with(String parameter, String value) {
-    res = createPostReq(data.updatePostPayload(parameter, value));
+  public void new_post_with(String caseName, String field) throws IOException {
+    HashMapper map=new HashMapper();
+    res = createPostReq(map.updatePostHash(caseName,field));
   }
 
-  @Given("Create post with {int} {int} {string} {string}")
-  public void create_post_with_null(int id, int userId, String title, String body) {
-    res = createPostReq(data.createPostPayload(id, userId, title, body));
+  @Given("Create post with {string}")
+  public void create_post_with_null(String caseName)
+      throws IOException {
+    HashMapper map=new HashMapper();
+    res = createPostReq(map.createPostHash(caseName));
 
   }
 
@@ -173,6 +179,10 @@ public class stepDefinition extends Utils {
   public void in_response_body_is_int(String key, int value) {
     assertEquals(value, post.getJsonInt(key));
   }
+  @Then("{string} in response body is null")
+  public void in_response_body_is_int(String key) {
+    assertNull(post.getJsonString(key));
+  }
 
   //Method which verifies userId using the getuseridfrompostid method
   @Then("Post belongs to correct user")
@@ -239,6 +249,8 @@ public class stepDefinition extends Utils {
       assertEquals(post.getUserId(), userId);
     }
   }
+
+
 }
 
 

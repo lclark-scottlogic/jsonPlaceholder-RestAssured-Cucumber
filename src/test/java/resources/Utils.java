@@ -12,6 +12,7 @@ import io.restassured.specification.ResponseSpecification;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.HashMap;
 import org.example.pojo.Post;
 
 public class Utils {
@@ -35,7 +36,7 @@ public class Utils {
       return req;
     }return req;
   }
-  public RequestSpecification createPostReq(Post post){
+  public RequestSpecification createPostReq(HashMap post){
     return given().spec(baseReq()).body(post);
   }
   public RequestSpecification getPostReq(int id){

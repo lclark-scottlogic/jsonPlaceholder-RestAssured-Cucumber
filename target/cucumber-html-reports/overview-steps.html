@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="css/cucumber.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+
+<script>
+$(document).ready(function() {
+    // this will tell tablesorter to try looking for the data-value attribute
+    // if present, it'll sort by that instead
+    // otherwise, it'll sort by the text content of the table cell
+    $("#tablesorter").tablesorter({
+        textAttribute: 'data-value',
+        // ignores the first row of the header, the 'scenario', 'steps', since
+        // sorting those doesn't make sense
+        selectorHeaders: '> thead tr:not(.dont-sort) th',
+        // use a stable sort
+        sortStable: true
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<title>Cucumber Reports (no 1) - Steps Overview</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">Cucumber Report</p>
+      <ul class="nav navbar-nav navbar-right">
+        <li role="presentation" ><a href="overview-features.html">Features</a></li>
+        <li role="presentation" ><a href="overview-tags.html">Tags</a></li>
+        <li role="presentation"     class="active" ><a href="overview-steps.html">Steps</a></li>
+        <li role="presentation" ><a href="overview-failures.html">Failures</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="col-md-5 col-md-offset-1">
+
+<table class="table table-bordered" id="build-info">
+  <thead>
+    <tr>
+      <th>Project</th>
+        <th>Number</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info">
+      <td>cucumber-jvm-example</td>
+        <td>1</td>
+      <td>27 Sep 2023, 14:39</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  <div class="col-md-3 col-md-offset-2">
+  </div>
+</div>
+
+
+<div id="report-lead" class="container-fluid">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Steps Statistics</h2>
+      <p>The following graph shows step statistics for this build. Below list is based on results.
+ step does not provide information about result then is not listed below.
+ Additionally @Before and @After are not counted because they are part of the scenarios, not steps.</p>
+  </div>
+</div>
+
+<div class="container-fluid" id="report">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <table id="tablesorter" class="stats-table table-hover">
+
+        <thead>
+          <tr class="header">
+            <th>Implementation</th>
+            <th>Occurrences</th>
+            <th>Average duration</th>
+            <th>Max duration</th>
+            <th>Total durations</th>
+            <th>Ratio</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.albumArrayHasLength(int)</td>
+              <td>4</td>
+              <td class="duration" data-value="8491350">0.008</td>
+              <td class="duration" data-value="8491350">0.016</td>
+              <td class="duration" data-value="33965400">0.033</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.allPostsHaveUserId(int)</td>
+              <td>3</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.allPostsRequest()</td>
+              <td>13</td>
+              <td class="duration" data-value="993153">0.000</td>
+              <td class="duration" data-value="993153">0.004</td>
+              <td class="duration" data-value="12911000">0.012</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.arrayHasLength(int)</td>
+              <td>3</td>
+              <td class="duration" data-value="3341900">0.003</td>
+              <td class="duration" data-value="3341900">0.003</td>
+              <td class="duration" data-value="10025700">0.010</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.commentArrayHasLength(int)</td>
+              <td>4</td>
+              <td class="duration" data-value="8395600">0.008</td>
+              <td class="duration" data-value="8395600">0.020</td>
+              <td class="duration" data-value="33582400">0.033</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.create_post_with_null(int,int,java.lang.String,java.lang.String)</td>
+              <td>5</td>
+              <td class="duration" data-value="151178300">0.151</td>
+              <td class="duration" data-value="151178300">0.735</td>
+              <td class="duration" data-value="755891500">0.755</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.in_response_body_is_int(java.lang.String,int)</td>
+              <td>28</td>
+              <td class="duration" data-value="177964">0.000</td>
+              <td class="duration" data-value="177964">0.001</td>
+              <td class="duration" data-value="4983000">0.004</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.in_response_body_is_multiline(java.lang.String,java.lang.String)</td>
+              <td>6</td>
+              <td class="duration" data-value="228566">0.000</td>
+              <td class="duration" data-value="228566">0.001</td>
+              <td class="duration" data-value="1371400">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.in_response_body_is_string(java.lang.String,java.lang.String)</td>
+              <td>28</td>
+              <td class="duration" data-value="106557">0.000</td>
+              <td class="duration" data-value="106557">0.001</td>
+              <td class="duration" data-value="2983600">0.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.new_post_with(java.lang.String,java.lang.String)</td>
+              <td>4</td>
+              <td class="duration" data-value="3516775">0.003</td>
+              <td class="duration" data-value="3516775">0.004</td>
+              <td class="duration" data-value="14067100">0.014</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.photoArrayHasLength(int)</td>
+              <td>4</td>
+              <td class="duration" data-value="11270825">0.011</td>
+              <td class="duration" data-value="11270825">0.026</td>
+              <td class="duration" data-value="45083300">0.045</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.postIdIsId(int)</td>
+              <td>13</td>
+              <td class="duration" data-value="1333515">0.001</td>
+              <td class="duration" data-value="1333515">0.006</td>
+              <td class="duration" data-value="17335700">0.017</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.post_belongs_to_correct_user()</td>
+              <td>18</td>
+              <td class="duration" data-value="155288">0.000</td>
+              <td class="duration" data-value="155288">0.001</td>
+              <td class="duration" data-value="2795200">0.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.resourceAtIndexHasWithValue(int,java.lang.String,int)</td>
+              <td>27</td>
+              <td class="duration" data-value="11618040">0.011</td>
+              <td class="duration" data-value="11618040">0.029</td>
+              <td class="duration" data-value="313687100">0.313</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.resourceAtIndexHasWithValue(int,java.lang.String,java.lang.String)</td>
+              <td>36</td>
+              <td class="duration" data-value="25364775">0.025</td>
+              <td class="duration" data-value="25364775">0.448</td>
+              <td class="duration" data-value="913131900">0.913</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.status_code_is_int(int)</td>
+              <td>23</td>
+              <td class="duration" data-value="5585686">0.005</td>
+              <td class="duration" data-value="5585686">0.043</td>
+              <td class="duration" data-value="128470800">0.128</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.todoArrayHasLength(int)</td>
+              <td>4</td>
+              <td class="duration" data-value="7810175">0.007</td>
+              <td class="duration" data-value="7810175">0.019</td>
+              <td class="duration" data-value="31240700">0.031</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.userCallsGetEndpointForPost()</td>
+              <td>5</td>
+              <td class="duration" data-value="239397700">0.239</td>
+              <td class="duration" data-value="239397700">0.324</td>
+              <td class="duration" data-value="1196988500">1.196</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.user_calls_endpoint_with_method(java.lang.String,java.lang.String)</td>
+              <td>49</td>
+              <td class="duration" data-value="275432095">0.275</td>
+              <td class="duration" data-value="275432095">1.130</td>
+              <td class="duration" data-value="13496172700">13.496</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.user_has_id(int)</td>
+              <td>3</td>
+              <td class="duration" data-value="2334233">0.002</td>
+              <td class="duration" data-value="2334233">0.006</td>
+              <td class="duration" data-value="7002700">0.007</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.useridIsPostId(int)</td>
+              <td>8</td>
+              <td class="duration" data-value="918212">0.000</td>
+              <td class="duration" data-value="918212">0.001</td>
+              <td class="duration" data-value="7345700">0.007</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.we_set_as(java.lang.String,java.lang.Integer)</td>
+              <td>4</td>
+              <td class="duration" data-value="1076525">0.001</td>
+              <td class="duration" data-value="1076525">0.001</td>
+              <td class="duration" data-value="4306100">0.004</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.stepDefinition.we_set_as(java.lang.String,java.lang.String)</td>
+              <td>4</td>
+              <td class="duration" data-value="2542600">0.002</td>
+              <td class="duration" data-value="2542600">0.006</td>
+              <td class="duration" data-value="10170400">0.010</td>
+              <td class="passed">100.00%</td>
+            </tr>
+        </tbody>
+
+        <tfoot class="total">
+          <tr>
+            <td>23</td>
+            <td>296</td>
+            <td class="duration">0.057</td>
+            <td class="duration">13.496</td>
+            <td class="duration">17.043</td>
+            <td>Totals</td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-default" id="footer">
+  <div class="container-fluid">
+    <p class="navbar-text navbar-right">
+        <small>generate Cucumber HTML reports via:&nbsp;</small>
+        <a class="navbar-link" href="https://github.com/jenkinsci/cucumber-reports-plugin">Jenkins Plugin</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-reporting">Standalone</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-sandwich">Sandwich</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/maven-cucumber-reporting">Maven</a>
+        &nbsp;&nbsp;
+    </p>
+  </div>
+</nav>
+
+</body>
+</html>
